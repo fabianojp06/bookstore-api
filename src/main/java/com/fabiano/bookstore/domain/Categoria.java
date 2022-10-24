@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 public class Categoria implements Serializable {
@@ -22,7 +25,7 @@ public class Categoria implements Serializable {
 	private String nome;
 	private String descricao;
 
-	@OneToMany(mappedBy = "categoria")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Livro> livros = new ArrayList<>();
 
 	public Categoria() {
